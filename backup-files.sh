@@ -1,13 +1,13 @@
 #!/bin/sh
 # Faz o backup de todos arquivos do portal
 # Last updated: Aug - 2011
-# By Lucas Arthur Penz - lucas.arthur@hotmail.com
+# By Lucas Arthur Penz - lucasarthurpenz@gmail.com
 
-MAILTO="lucas.ti@fasul.edu.br" # Email para onde sera enviado o aviso de sucesso
+MAILTO="email" # Email para onde sera enviado o aviso de sucesso
 
 NOW="$(date +"%d-%m-%Y")" # Pega data no formato dd-mm-yyyy
 
-DEST="/backup_hd320/portal/$NOW" # Diretório de destino do backup
+DEST="/directory/$NOW" # Diretório de destino do backup
     
 [ ! -d $DEST ] && mkdir -p $DEST || : # Cria o diretório
 
