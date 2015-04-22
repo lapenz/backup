@@ -1,0 +1,25 @@
+#!/bin/sh
+#Threshold is set to 70 here.
+THRESHOLD=70
+MAILTO="mail@mail.com"
+TEMPFILE=/tmp/diskspace.temp
+HOSTNAME=`hostname`
+
+rm -f $TEMPFILE
+
+#Calculate the Current Disk Usage with the below command.
+CDU=$(df -h /dev/sdb1 | tail -1 | awk '{print $5}' | sed 's/%//')
+
+#Compare the current value with the threshold one.
+if [ $(expr $CDU ">=" $THRESHOLD) -ne 0 ]
+then
+echo "Atenção!!! O espaço em disco utilizado pelo servidor $HOSTNAME da partição sdb1 é de ${CDU}%." >> $TEMPFILE
+fi
+
+#Send an email if /tmp/diskspace.temp is present.
+if [ -e $TEMPFILE ]
+then
+mail -s "Disk space alert" $MAILTO < $TEMPFILE
+fi
+
+rm -f $TEMPFILE
